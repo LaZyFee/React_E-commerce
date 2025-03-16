@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@plugin "daisyui";
+@plugin "daisyui" {
+  themes: corporate;
+}
+
+@theme {
+  --breakpoint-sm: 32rem;
+  --breakpoint-md: 40rem;
+  --breakpoint-lg: 64rem;
+}
