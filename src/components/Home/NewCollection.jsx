@@ -1,160 +1,106 @@
+import all_product from "@/assets/Data/all_product";
 import React, { useState } from "react";
-import img1 from "@/assets/hero/01.jfif";
-import img2 from "@/assets/hero/02.webp";
-import img3 from "@/assets/hero/03.jfif";
-import img4 from "@/assets/hero/04.jpg";
-import img5 from "@/assets/hero/33.jpg";
-import img6 from "@/assets/hero/06.webp";
-import img7 from "@/assets/hero/07.webp";
-import img8 from "@/assets/hero/08.webp";
-import img9 from "@/assets/hero/bluetoothspeaker.webp";
-import img10 from "@/assets/hero/backpack.jpg";
+import { Link } from "react-router-dom";
+
+const TABS = ["All", "Men", "Women", "Kid"];
 
 const NewCollection = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Samsung Galaxy Z",
-      category: "mobile",
-      image: img1,
-      new_price: 1799.99,
-      old_price: 1899.99,
-    },
-    {
-      id: 2,
-      name: "Running Shoes",
-      category: "shoes",
-      image: img2,
-      new_price: 180.0,
-      old_price: 220.0,
-    },
-    {
-      id: 3,
-      name: "Travel Tote Bag",
-      category: "bags",
-      image: img3,
-      new_price: 250.0,
-      old_price: 300.0,
-    },
-    {
-      id: 4,
-      name: "Aviator Sunglasses",
-      category: "sunglasses",
-      image: img4,
-      new_price: 150.0,
-      old_price: 180.0,
-    },
-    {
-      id: 5,
-      name: "Men's Trucker Jacket",
-      category: "jackets",
-      image: img5,
-      new_price: 120.0,
-      old_price: 150.0,
-    },
-    {
-      id: 6,
-      name: "Watch",
-      category: "special",
-      image: img6,
-      new_price: 299.99,
-      old_price: 399.99,
-    },
-    {
-      id: 7,
-      name: "Leather Wallet",
-      category: "accessories",
-      image: img7,
-      new_price: 70.0,
-      old_price: 90.0,
-    },
-    {
-      id: 8,
-      name: "Wireless Earbuds",
-      category: "audio",
-      image: img8,
-      new_price: 50.0,
-      old_price: 75.0,
-    },
-    {
-      id: 9,
-      name: "Bluetooth Speaker",
-      category: "audio",
-      image: img9,
-      new_price: 99.99,
-      old_price: 120.0,
-    },
-    {
-      id: 10,
-      name: "Canvas Backpack",
-      category: "bags",
-      image: img10,
-      new_price: 40.0,
-      old_price: 60.0,
-    },
-  ];
+  const [visibleProducts, setVisibleProducts] = useState(9);
+  const [activeTab, setActiveTab] = useState("All");
 
-  const [visibleProducts, setVisibleProducts] = useState(6);
+  const filteredProducts =
+    activeTab === "All"
+      ? all_product
+      : all_product.filter(
+          (product) => product.category === activeTab.toLowerCase()
+        );
 
   return (
-    <div className="m-4">
-      <h2 className="text-primary text-center font-bold text-3xl md:text-4xl lg:text-5xl my-8">
-        New Collection
+    <div className="mx-auto max-w-2xl px-4 sm:pt-24 lg:max-w-6xl lg:px-10">
+      <h2 className="text-4xl font-bold tracking-tighter text-gray-900 text-center font-serif">
+        Popular
       </h2>
-      <p className="text-center text-gray-600 max-w-2xl mx-auto text-lg">
-        Discover the latest arrivals and get the best deals on top-quality
-        products.
+      <p className="text-center mt-3 md:px-36 font-mono">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, optio
+        impedit eligendi voluptas dolorem esse quasi repudianda Lorem
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        {products.slice(0, visibleProducts).map((product) => (
-          <div key={product.id} className="card w-80  mx-auto">
-            <figure>
+      {/* Tabs */}
+      <div className="flex justify-center mt-6 space-x-4">
+        {TABS.map((tab) => (
+          <button
+            key={tab}
+            className={`px-6 py-2 text-lg font-medium rounded-md transition-colors duration-200 ${
+              activeTab === tab
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+            onClick={() => {
+              setActiveTab(tab);
+              setVisibleProducts(9);
+            }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Product Grid */}
+      <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 px-6 md:px-0 sm:grid-cols-2 lg:grid-cols-3">
+        {filteredProducts.slice(0, visibleProducts).map((product) => (
+          <div
+            key={product.id}
+            className="group relative  p-4  h-[400px] flex flex-col justify-between"
+          >
+            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 h-96">
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-56 object-contain rounded-t-lg"
+                className="h-full w-full object-cover object-center"
               />
-            </figure>
-
-            <div className="card-body">
-              <div className="flex justify-between items-center">
-                <h3 className="card-title text-gray-900">{product.name}</h3>
-                <span className="badge badge-accent badge-lg">
-                  {product.category}
-                </span>
-              </div>
-
-              <div className="mt-2 flex items-center space-x-2">
-                <span className="text-xl font-bold text-red-500">
-                  ${product.new_price.toFixed(2)}
-                </span>
-                <span className="text-gray-400 line-through text-sm">
-                  ${product.old_price.toFixed(2)}
-                </span>
-              </div>
-
-              <div className="card-actions mt-4">
-                <button className="btn btn-primary w-full hover:scale-105 transition-transform duration-200">
-                  Buy Now
-                </button>
-              </div>
+            </div>
+            <div className="mt-4 flex justify-between">
+              <h3 className="text-sm text-gray-700 font-mono">
+                {product.name}
+              </h3>
+              <p className="text-sm font-medium text-gray-900">
+                ${product.new_price}
+              </p>
+            </div>
+            <div className="flex justify-end gap-3 mt-5 items-center">
+              <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-red-500 transition duration-200">
+                Add to Cart
+              </button>
+              <Link
+                to={`/products/${product.id}`}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-red-500 transition duration-200"
+              >
+                View
+              </Link>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Show More Button */}
-      {visibleProducts < products.length && (
-        <div className="text-center mt-8">
+      {/* Pagination Buttons */}
+      <div className="text-center mt-8">
+        {visibleProducts < filteredProducts.length && (
           <button
-            onClick={() => setVisibleProducts((prev) => prev + 6)}
+            onClick={() => setVisibleProducts((prev) => prev + 9)}
             className="btn btn-outline btn-primary px-6 py-3 text-lg hover:scale-105 transition-transform duration-200"
           >
             Show More
           </button>
-        </div>
-      )}
+        )}
+        {visibleProducts > 9 && (
+          <button
+            onClick={() => setVisibleProducts(9)}
+            className="btn btn-outline btn-secondary px-6 py-3 text-lg ml-4 hover:scale-105 transition-transform duration-200"
+          >
+            Show Less
+          </button>
+        )}
+      </div>
     </div>
   );
 };

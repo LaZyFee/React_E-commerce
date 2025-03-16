@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useFilter } from "@/Context/FilterContext";
 import { Tally3 } from "lucide-react";
 
-const ProductNav = ({ className }) => {
+const AllProducts = ({ className }) => {
   const { searchQuery, selectedCategory, minPrice, maxPrice, keyword } =
     useFilter();
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // Set dynamically
+  const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 9;
 
   useEffect(() => {
@@ -70,10 +70,6 @@ const ProductNav = ({ className }) => {
 
   return (
     <section className={`max-w-6xl mx-auto p-5 ${className}`}>
-      <h1 className="text-3xl text-primary font-bold mb-5 text-center">
-        All Products
-      </h1>
-
       {/* Filter Button */}
       <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="relative inline-block">
@@ -131,7 +127,7 @@ const ProductNav = ({ className }) => {
           </div>
         ))}
       </div>
-
+      {/* Pagination */}
       <div className="flex justify-center mt-8 space-x-2">
         {/* Prev Button */}
         <button
@@ -212,4 +208,4 @@ const ProductNav = ({ className }) => {
   );
 };
 
-export default ProductNav;
+export default AllProducts;
