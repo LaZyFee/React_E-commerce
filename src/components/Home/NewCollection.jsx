@@ -17,13 +17,16 @@ const NewCollection = () => {
 
   return (
     <div className="mx-auto max-w-2xl px-4 sm:pt-24 lg:max-w-6xl lg:px-10">
-      <h2 className="text-4xl font-bold tracking-tighter text-gray-900 text-center font-serif">
-        Popular
+      {/* Featured Tag */}
+      <div className="flex items-center gap-2 mb-4">
+        <span className="w-2 h-6 bg-red-500 rounded"></span>
+        <p className="text-red-500 font-semibold">Popular Products</p>
+      </div>
+
+      {/* Section Heading */}
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        Explore Our Popular Products
       </h2>
-      <p className="text-center mt-3 md:px-36 font-mono">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, optio
-        impedit eligendi voluptas dolorem esse quasi repudianda Lorem
-      </p>
 
       {/* Tabs */}
       <div className="flex justify-center mt-6 space-x-4">

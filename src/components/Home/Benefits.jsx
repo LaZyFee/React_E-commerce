@@ -32,16 +32,16 @@ const benefits = [
 
 const Benefits = () => {
   return (
-    <div className="py-12 bg-gray-100">
+    <div className="py-12">
       <div className="container mx-auto text-center">
-        <h2 className="text-4xl font-bold text-gray-800 mb-6">
+        <h2 className="text-4xl font-bold tracking-tighter text-gray-900 text-center font-serif mb-6">
           Why Shop With Us?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6">
           {benefits.map((benefit) => (
             <div
               key={benefit.id}
-              className="bg-white shadow-xl p-6 rounded-lg flex flex-col items-center transition duration-300 hover:scale-105 hover:shadow-2xl"
+              className="p-6 flex flex-col items-center transition duration-300 hover:scale-105"
             >
               {benefit.icon}
               <h3 className="text-xl font-semibold mt-4 text-gray-800">

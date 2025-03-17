@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFilter } from "@/Context/FilterContext";
 import { Tally3 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AllProducts = ({ className }) => {
   const { searchQuery, selectedCategory, minPrice, maxPrice, keyword } =
@@ -70,27 +71,39 @@ const AllProducts = ({ className }) => {
 
   return (
     <section className={`max-w-6xl mx-auto p-5 ${className}`}>
+      {/* Featured Tag */}
+      <div className="flex items-center gap-2 mb-4 ">
+        <span className="w-2 h-6 bg-red-500 rounded"></span>
+        <p className="text-red-500 font-semibold">Our Products</p>
+      </div>
+
+      {/* Section Heading */}
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        Explore Our Products
+      </h2>
       {/* Filter Button */}
-      <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div className="relative inline-block">
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center gap-2 shadow-md hover:bg-blue-600 transition">
-            <Tally3 />
-            {filter === "all"
-              ? "Filter"
-              : filter.charAt(0).toUpperCase() + filter.slice(1)}
-          </button>
-          <ul className="absolute left-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg hidden group-hover:block">
-            {["cheap", "expensive", "popular"].map((f) => (
-              <li key={f}>
-                <button
-                  className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                  onClick={() => setFilter(f)}
-                >
-                  {f.charAt(0).toUpperCase() + f.slice(1)}
-                </button>
-              </li>
-            ))}
-          </ul>
+      <div className="flex justify-end">
+        <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="relative inline-block">
+            <button className="px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center gap-2 shadow-md hover:bg-blue-600 transition">
+              <Tally3 />
+              {filter === "all"
+                ? "Filter"
+                : filter.charAt(0).toUpperCase() + filter.slice(1)}
+            </button>
+            <ul className="absolute left-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg hidden group-hover:block">
+              {["cheap", "expensive", "popular"].map((f) => (
+                <li key={f}>
+                  <button
+                    className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                    onClick={() => setFilter(f)}
+                  >
+                    {f.charAt(0).toUpperCase() + f.slice(1)}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -119,9 +132,12 @@ const AllProducts = ({ className }) => {
                 ${product.price}
               </p>
               <div className="flex justify-end mt-4">
-                <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-                  View Details
-                </button>
+                <Link to={`/product/${product.id}`}>
+                  {" "}
+                  <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                    View Details
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

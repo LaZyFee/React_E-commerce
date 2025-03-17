@@ -98,9 +98,16 @@ const SlidingProduct = () => {
   ];
 
   return (
-    <div className="m-4">
-      <h2 className="text-primary text-center font-bold text-3xl md:text-4xl my-8">
-        Trending Products
+    <div className="mx-auto max-w-2xl px-4 sm:pt-24 lg:max-w-6xl lg:px-10">
+      {/* Featured Tag */}
+      <div className="flex items-center gap-2 mb-4">
+        <span className="w-2 h-6 bg-red-500 rounded"></span>
+        <p className="text-red-500 font-semibold">Trending Products</p>
+      </div>
+
+      {/* Section Heading */}
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        Explore Our Trending Products
       </h2>
       <Swiper
         spaceBetween={20}
